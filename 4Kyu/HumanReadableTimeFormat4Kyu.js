@@ -48,7 +48,9 @@ function formatDuration (seconds) {
     if (hours > 0) {
         result += `${result.length > 0 ? ', ' : ''}${hours} hour${hours > 1 ? 's' : ''}`;
     }
-    if (minutes > 0) {
+    if (minutes > 0 && secondsLeft === 0) {
+        result += `${result.length > 0 ? ' and ' : ''}${minutes} minute${minutes > 1 ? 's' : ''}`;
+    } else if(minutes > 0) {
         result += `${result.length > 0 ? ', ' : ''}${minutes} minute${minutes > 1 ? 's' : ''}`;
     }
     if (secondsLeft > 0) {
