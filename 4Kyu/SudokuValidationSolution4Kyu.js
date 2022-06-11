@@ -33,3 +33,60 @@
 //   [3, 0, 0, 4, 8, 1, 1, 7, 9]
 // ]); // => false
 // DATA STRUCTURES ALGORITHMS VALIDATION
+
+function validSolution(board){
+    let valid = true;
+    let boardCopy = board.slice();
+
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+            if (board[i][j] === 0) {
+                boardCopy[i][j] = 0;
+            }
+        }
+    }
+
+
+
+    // check rows
+    for (let i = 0; i < board.length; i++) {
+        let row = board[i];
+        let rowCopy = row.slice();
+        rowCopy.sort((a, b) => a - b);
+        if (rowCopy.toString() !== row.toString()) {
+            valid = false;
+        }
+    }
+
+    // check columns
+    for (let i = 0; i < board.length; i++) {
+        let column = [];
+        for (let j = 0; j < board.length; j++) {
+            column.push(board[j][i]);
+        }
+        let columnCopy = column.slice();
+        columnCopy.sort((a, b) => a - b);
+        if (columnCopy.toString() !== column.toString()) {
+            valid = false;
+        }
+    }
+
+    // check 3x3 sub-grids
+    for (let i = 0; i < board.length; i += 3) {
+        for (let j = 0; j < board.length; j += 3) {
+            let subGrid = [];
+            for (let k = 0; k < 3; k++) {
+                for (let l = 0; l < 3; l++) {
+                    subGrid.push(board[i + k][j + l]);
+                }
+            }
+            let subGridCopy = subGrid.slice();
+            subGridCopy.sort((a, b) => a - b);
+            if (subGridCopy.toString() !== subGrid.toString()) {
+                valid = false;
+            }
+        }
+    }
+
+    return valid;
+  }
