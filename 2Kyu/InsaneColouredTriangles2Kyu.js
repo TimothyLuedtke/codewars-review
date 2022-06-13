@@ -36,11 +36,14 @@
 // triangle('RBRGBRBGGRRRBGBBBGG') == 'G'
 
 function triangle(row) {
-    let vector = [];
-    while (row.length) {
-      vector.push(...row.split(''));
-      row = row.slice(1);
-    }
-    return vector.pop();
-  }
-
+    return row
+        .split('')
+        .reduce((acc, curr) => {
+            if (acc === curr) {
+                return acc;
+            } else {
+                return curr;
+            }
+        }
+        , row[0]);
+}
